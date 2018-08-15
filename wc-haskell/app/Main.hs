@@ -1,6 +1,6 @@
 module Main where
 
-import Control.Concurrent
+--import Control.Concurrent
 import Data.List
 import System.Directory
   ( getCurrentDirectory
@@ -34,17 +34,15 @@ printTotal :: Int -> IO ()
 printTotal total =
   putStrLn $ (leftPad 10 $ show total) ++ " " ++ "[TOTAL]"
 
-countLinesTask :: Chan LineCount -> FilePath -> FilePath -> IO ()
-countLinesTask chan currentDir path = do
-  forkIO $ do
-    count <- countLines path
-    let path' = normalizePathToLocal path
-    writeChan chan (LineCount path' count)
-  return ()
+countLinesTask :: FilePath -> FilePath -> IO (LineCount)
+countLinesTask currentDir path = do
+  count <- countLines path
+  return (LineCount path' count)
   where normalizePathToLocal = \path ->
                                  case stripPrefix (currentDir ++ "/") path of
                                    Just stripped -> stripped
                                    Nothing -> path
+        path' = normalizePathToLocal path
 
 main :: IO ()
 main = do
@@ -54,11 +52,7 @@ main = do
               Just path -> path
               Nothing -> currentDir
   files <- getFilesInDir dir
-  let numFiles = length files
-  chan <- newChan
-  mapM_ (countLinesTask chan currentDir) files
-  chanContents <- getChanContents chan
-  let lineCounts = take numFiles chanContents
+  lineCounts <- mapM (countLinesTask currentDir) files
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total
