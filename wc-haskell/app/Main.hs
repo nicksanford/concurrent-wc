@@ -2,6 +2,8 @@ module Main where
 
 --import Control.Concurrent
 import Data.List
+import qualified Control.Parallel.Strategies as PS
+import qualified Control.Concurrent.Async as CCA
 import System.Directory
   ( getCurrentDirectory
   )
@@ -34,7 +36,7 @@ printTotal :: Int -> IO ()
 printTotal total =
   putStrLn $ (leftPad 10 $ show total) ++ " " ++ "[TOTAL]"
 
-countLinesTask :: FilePath -> FilePath -> IO (LineCount)
+countLinesTask :: FilePath -> FilePath -> IO LineCount
 countLinesTask currentDir path = do
   count <- countLines path
   return (LineCount path' count)
@@ -52,7 +54,7 @@ main = do
               Just path -> path
               Nothing -> currentDir
   files <- getFilesInDir dir
-  lineCounts <- mapM (countLinesTask currentDir) files
+  lineCounts <- CCA.mapConcurrently (countLinesTask currentDir) files
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total
