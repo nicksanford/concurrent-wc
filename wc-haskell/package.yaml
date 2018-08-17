@@ -21,6 +21,9 @@ dependencies:
 - filepath >= 1 && <= 2
 - directory >= 1.0 && < 2.0
 - unix-compat >= 0.1 && <= 1.0
+- async
+- parallel
+- monad-par >= 0.3.4.7
 
 library:
   source-dirs: src

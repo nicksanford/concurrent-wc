@@ -2,6 +2,10 @@ module Main where
 
 import Control.Concurrent
 import Data.List
+import Control.Monad.IO.Class
+import qualified Control.Monad.Par.IO  as ParIO
+import qualified Control.Parallel.Strategies as PS
+import qualified Control.Concurrent.Async as CCA
 import System.Directory
   ( getCurrentDirectory
   )
@@ -62,3 +66,16 @@ main = do
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total
+
+-- test :: IO ()
+-- test = do
+--   args <- getArgs
+--   currentDir <- getCurrentDirectory
+--   let dir = case head' args of
+--               Just path -> path
+--               Nothing -> currentDir
+--   files <- getFilesInDir dir
+--   let lineCounts = ParIO.mapPar ParIO.repr (countLinesTask currentDir) files
+--   printLineCounts lineCounts
+--   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
+--   printTotal total
