@@ -36,6 +36,6 @@ isRegularFile' :: FilePath -> IO Bool
 isRegularFile' path =
   isRegularFile <$> getFileStatus path
 
-countLines :: FilePath -> IO Int
-countLines path =
-  fromIntegral <$> C.count '\n' <$> B.readFile path
+countLines :: B.ByteString -> Int
+countLines  =
+  fromIntegral . C.count '\n'

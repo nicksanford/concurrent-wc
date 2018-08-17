@@ -1,11 +1,16 @@
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveAnyClass #-}
 module Main where
 
 import Control.Concurrent
+import qualified Data.ByteString.Lazy as B
 import Data.List
 import Control.Monad.IO.Class
 import qualified Control.Monad.Par.IO  as ParIO
+import qualified Control.Monad.Par  as Par
 import qualified Control.Parallel.Strategies as PS
 import qualified Control.Concurrent.Async as CCA
+import GHC.Generics (Generic)
 import System.Directory
   ( getCurrentDirectory
   )
@@ -13,7 +18,7 @@ import System.Environment
 
 import Lib
 
-data LineCount = LineCount FilePath Int deriving (Eq)
+data LineCount = LineCount FilePath Int deriving (Eq, Generic, Par.NFData)
 
 instance Show LineCount where
   show (LineCount path count) = (leftPad 10 $ show count) ++ " " ++ path
@@ -38,13 +43,10 @@ printTotal :: Int -> IO ()
 printTotal total =
   putStrLn $ (leftPad 10 $ show total) ++ " " ++ "[TOTAL]"
 
-countLinesTask :: Chan LineCount -> FilePath -> FilePath -> IO ()
-countLinesTask chan currentDir path = do
-  forkIO $ do
-    count <- countLines path
-    let path' = normalizePathToLocal path
-    writeChan chan (LineCount path' count)
-  return ()
+countLinesTask :: FilePath -> (FilePath, B.ByteString) -> LineCount
+countLinesTask currentDir (path, lines) = do
+  let path' = normalizePathToLocal path
+  LineCount path' (countLines lines)
   where normalizePathToLocal = \path ->
                                  case stripPrefix (currentDir ++ "/") path of
                                    Just stripped -> stripped
@@ -58,24 +60,8 @@ main = do
               Just path -> path
               Nothing -> currentDir
   files <- getFilesInDir dir
-  let numFiles = length files
-  chan <- newChan
-  mapM_ (countLinesTask chan currentDir) files
-  chanContents <- getChanContents chan
-  let lineCounts = take numFiles chanContents
+  contents <- mapM B.readFile files
+  let lineCounts = Par.runPar $ Par.parMap (countLinesTask currentDir) (zip files contents)
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total
-
--- test :: IO ()
--- test = do
---   args <- getArgs
---   currentDir <- getCurrentDirectory
---   let dir = case head' args of
---               Just path -> path
---               Nothing -> currentDir
---   files <- getFilesInDir dir
---   let lineCounts = ParIO.mapPar ParIO.repr (countLinesTask currentDir) files
---   printLineCounts lineCounts
---   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
---   printTotal total
