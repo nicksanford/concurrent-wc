@@ -11,6 +11,8 @@ import qualified Control.Monad.Par  as Par
 import qualified Control.Parallel.Strategies as PS
 import qualified Control.Concurrent.Async as CCA
 import GHC.Generics (Generic)
+import qualified System.IO.MMap as MMap
+import qualified Control.Concurrent.ParallelIO.Global as Parallel
 import System.Directory
   ( getCurrentDirectory
   )
@@ -43,10 +45,20 @@ printTotal :: Int -> IO ()
 printTotal total =
   putStrLn $ (leftPad 10 $ show total) ++ " " ++ "[TOTAL]"
 
-countLinesTask :: FilePath -> (FilePath, B.ByteString) -> LineCount
-countLinesTask currentDir (path, lines) = do
+-- countLinesTask :: FilePath -> (FilePath, B.ByteString) -> LineCount
+-- countLinesTask currentDir (path, lines) = do
+--   let path' = normalizePathToLocal path
+--   LineCount path' (countLines lines)
+--   where normalizePathToLocal = \path ->
+--                                  case stripPrefix (currentDir ++ "/") path of
+--                                    Just stripped -> stripped
+--                                    Nothing -> path
+
+countLinesTask :: FilePath -> FilePath -> IO LineCount
+countLinesTask currentDir path = do
+  lines <- B.readFile path
   let path' = normalizePathToLocal path
-  LineCount path' (countLines lines)
+  return $ LineCount path' (countLines lines)
   where normalizePathToLocal = \path ->
                                  case stripPrefix (currentDir ++ "/") path of
                                    Just stripped -> stripped
@@ -60,8 +72,8 @@ main = do
               Just path -> path
               Nothing -> currentDir
   files <- getFilesInDir dir
-  contents <- mapM B.readFile files
-  let lineCounts = Par.runPar $ Par.parMap (countLinesTask currentDir) (zip files contents)
+--  contents <- mapM (\x -> MMap.mmapFileByteStringLazy x Nothing) files
+  lineCounts <- Parallel.parallel $ map (countLinesTask currentDir) files
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total

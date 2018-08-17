@@ -24,6 +24,8 @@ dependencies:
 - async
 - parallel
 - monad-par >= 0.3.4.7
+- mmap >= 0.5.9
+- parallel-io >= 0.3.3
 
 library:
   source-dirs: src
