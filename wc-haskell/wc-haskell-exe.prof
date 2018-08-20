@@ -1,9 +1,9 @@
-	Mon Aug 20 07:09 2018 Time and Allocation Profiling Report  (Final)
+	Mon Aug 20 07:13 2018 Time and Allocation Profiling Report  (Final)
 
 	   wc-haskell-exe +RTS -N -p -RTS ../tmp
 
-	total time  =        0.14 secs   (545 ticks @ 1000 us, 4 processors)
-	total alloc = 409,820,464 bytes  (excludes profiling overheads)
+	total time  =        0.15 secs   (588 ticks @ 1000 us, 4 processors)
+	total alloc = 388,916,576 bytes  (excludes profiling overheads)
 
 COST CENTRE MODULE SRC                        %time %alloc
 
@@ -15,7 +15,6 @@ COST CENTRE                                MODULE                SRC            
 
 MAIN                                       MAIN                  <built-in>                  177          0    0.0    0.0   100.0  100.0
  CAF                                       System.Directory      <entire-module>             323          0    0.0    0.0     0.0    0.0
- CAF                                       Data.ByteString       <entire-module>             306          0    0.0    0.0     0.0    0.0
  CAF                                       GHC.Conc.Signal       <entire-module>             273          0    0.0    0.0     0.0    0.0
  CAF                                       GHC.IO.Encoding       <entire-module>             256          0    0.0    0.0     0.0    0.0
  CAF                                       GHC.IO.Encoding.Iconv <entire-module>             254          0    0.0    0.0     0.0    0.0
@@ -29,34 +28,35 @@ MAIN                                       MAIN                  <built-in>     
   main                                     Main                  app/Main.hs:(50,1)-(64,18)  354          1    0.0    0.0     0.0    0.0
  CAF:main2                                 Main                  <no location info>          350          0    0.0    0.0     0.0    0.0
  main                                      Main                  app/Main.hs:(50,1)-(64,18)  355          0    0.0    0.0   100.0  100.0
-  countLinesTask                           Main                  app/Main.hs:(38,1)-(47,50)  366        100    0.0    0.0    99.3   99.8
-   countLines                              Lib                   src/Lib.hs:(41,1)-(42,34)   367        100   99.3   99.8    99.3   99.8
-   countLinesTask.normalizePathToLocal     Main                  app/Main.hs:(44,9)-(47,50)  378        100    0.0    0.0     0.0    0.0
-    countLinesTask.normalizePathToLocal.\  Main                  app/Main.hs:(45,34)-(47,50) 381          0    0.0    0.0     0.0    0.0
-   countLinesTask.path'                    Main                  app/Main.hs:41:9-41         377        100    0.0    0.0     0.0    0.0
-    countLinesTask.normalizePathToLocal    Main                  app/Main.hs:(44,9)-(47,50)  379          0    0.0    0.0     0.0    0.0
-     countLinesTask.normalizePathToLocal.\ Main                  app/Main.hs:(45,34)-(47,50) 380        100    0.0    0.0     0.0    0.0
-  getFilesInDir                            Lib                   src/Lib.hs:(20,1)-(21,42)   356          1    0.0    0.0     0.4    0.1
+  countLinesTask                           Main                  app/Main.hs:(38,1)-(47,50)  366        100    0.3    0.0    99.8   99.8
+   countLinesTask.normalizePathToLocal     Main                  app/Main.hs:(44,9)-(47,50)  379        100    0.0    0.0     0.0    0.0
+    countLinesTask.normalizePathToLocal.\  Main                  app/Main.hs:(45,34)-(47,50) 382          0    0.0    0.0     0.0    0.0
+   countLinesTask.path'                    Main                  app/Main.hs:41:9-41         378        100    0.0    0.0     0.2    0.0
+    countLinesTask.normalizePathToLocal    Main                  app/Main.hs:(44,9)-(47,50)  380          0    0.0    0.0     0.2    0.0
+     countLinesTask.normalizePathToLocal.\ Main                  app/Main.hs:(45,34)-(47,50) 381        100    0.2    0.0     0.2    0.0
+   countLines                              Lib                   src/Lib.hs:(41,1)-(42,34)   368         99   98.8   98.7    98.8   98.7
+   countLines                              Lib                   src/Lib.hs:(41,1)-(42,34)   367          1    0.5    1.1     0.5    1.1
+  getFilesInDir                            Lib                   src/Lib.hs:(20,1)-(21,42)   356          1    0.0    0.0     0.2    0.1
    listDirectory'                          Lib                   src/Lib.hs:(24,1)-(26,59)   357          1    0.0    0.0     0.0    0.0
     listDirectory'.fullyQualify            Lib                   src/Lib.hs:26:9-59          360          1    0.0    0.0     0.0    0.0
      listDirectory'.fullyQualify.\         Lib                   src/Lib.hs:26:38-58         363        100    0.0    0.0     0.0    0.0
-   onlyRegularFiles                        Lib                   src/Lib.hs:(29,1)-(34,22)   361          1    0.0    0.0     0.4    0.0
-    isRegularFile'                         Lib                   src/Lib.hs:(37,1)-(38,38)   362        100    0.4    0.0     0.4    0.0
+   onlyRegularFiles                        Lib                   src/Lib.hs:(29,1)-(34,22)   361          1    0.0    0.0     0.2    0.0
+    isRegularFile'                         Lib                   src/Lib.hs:(37,1)-(38,38)   362        100    0.2    0.0     0.2    0.0
     onlyRegularFiles.|>                    Lib                   src/Lib.hs:34:9-22          364          2    0.0    0.0     0.0    0.0
      onlyRegularFiles.\                    Lib                   src/Lib.hs:32:32-37         365        100    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                    Lib                   src/Lib.hs:33:24            369         97    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                    Lib                   src/Lib.hs:33:24            368          2    0.0    0.0     0.0    0.0
+     onlyRegularFiles.\                    Lib                   src/Lib.hs:33:24            370         96    0.0    0.0     0.0    0.0
+     onlyRegularFiles.\                    Lib                   src/Lib.hs:33:24            369          2    0.0    0.0     0.0    0.0
   main.dir                                 Main                  app/Main.hs:(53,7)-(55,35)  358          1    0.0    0.0     0.0    0.0
    head'                                   Main                  app/Main.hs:(26,1)-(27,21)  359          1    0.0    0.0     0.0    0.0
-  main.lineCounts                          Main                  app/Main.hs:61:7-45         371          1    0.0    0.0     0.0    0.0
-  main.numFiles                            Main                  app/Main.hs:57:7-29         370          1    0.0    0.0     0.0    0.0
-  main.total                               Main                  app/Main.hs:63:7-70         383          1    0.0    0.0     0.0    0.0
-   main.total.\                            Main                  app/Main.hs:63:48-56        384        100    0.0    0.0     0.0    0.0
-  printLineCounts                          Main                  app/Main.hs:(30,1)-(31,46)  372          1    0.4    0.0     0.4    0.1
-   show                                    Main                  app/Main.hs:15:3-72         374        100    0.0    0.0     0.0    0.0
-    leftPad                                Main                  app/Main.hs:(21,1)-(23,16)  375        100    0.0    0.0     0.0    0.0
-     leftPad.spaces                        Main                  app/Main.hs:22:7-49         376        100    0.0    0.0     0.0    0.0
-   compare                                 Main                  app/Main.hs:18:3-63         373         99    0.0    0.0     0.0    0.0
-  printTotal                               Main                  app/Main.hs:(34,1)-(35,58)  382          1    0.0    0.0     0.0    0.0
-   leftPad                                 Main                  app/Main.hs:(21,1)-(23,16)  385          1    0.0    0.0     0.0    0.0
-    leftPad.spaces                         Main                  app/Main.hs:22:7-49         386          1    0.0    0.0     0.0    0.0
+  main.lineCounts                          Main                  app/Main.hs:61:7-45         372          1    0.0    0.0     0.0    0.0
+  main.numFiles                            Main                  app/Main.hs:57:7-29         371          1    0.0    0.0     0.0    0.0
+  main.total                               Main                  app/Main.hs:63:7-71         384          1    0.0    0.0     0.0    0.0
+   main.total.\                            Main                  app/Main.hs:63:49-57        385        100    0.0    0.0     0.0    0.0
+  printLineCounts                          Main                  app/Main.hs:(30,1)-(31,46)  373          1    0.0    0.0     0.0    0.1
+   show                                    Main                  app/Main.hs:15:3-72         375        100    0.0    0.0     0.0    0.0
+    leftPad                                Main                  app/Main.hs:(21,1)-(23,16)  376        100    0.0    0.0     0.0    0.0
+     leftPad.spaces                        Main                  app/Main.hs:22:7-49         377        100    0.0    0.0     0.0    0.0
+   compare                                 Main                  app/Main.hs:18:3-63         374         99    0.0    0.0     0.0    0.0
+  printTotal                               Main                  app/Main.hs:(34,1)-(35,58)  383          1    0.0    0.0     0.0    0.0
+   leftPad                                 Main                  app/Main.hs:(21,1)-(23,16)  386          1    0.0    0.0     0.0    0.0
+    leftPad.spaces                         Main                  app/Main.hs:22:7-49         387          1    0.0    0.0     0.0    0.0

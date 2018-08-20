@@ -60,5 +60,5 @@ main = do
   chanContents <- getChanContents chan
   let lineCounts = take numFiles chanContents
   printLineCounts lineCounts
-  let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
+  let total = foldl' (\t (LineCount _ count) -> count + t) 0 lineCounts
   printTotal total
