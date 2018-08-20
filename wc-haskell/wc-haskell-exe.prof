@@ -1,13 +1,13 @@
-	Mon Aug 20 06:49 2018 Time and Allocation Profiling Report  (Final)
+	Mon Aug 20 06:53 2018 Time and Allocation Profiling Report  (Final)
 
 	   wc-haskell-exe +RTS -N -p -RTS ../tmp
 
-	total time  =        0.07 secs   (280 ticks @ 1000 us, 4 processors)
-	total alloc = 435,847,880 bytes  (excludes profiling overheads)
+	total time  =        0.07 secs   (298 ticks @ 1000 us, 4 processors)
+	total alloc = 435,813,336 bytes  (excludes profiling overheads)
 
 COST CENTRE MODULE SRC                        %time %alloc
 
-countLines  Lib    src/Lib.hs:(41,1)-(42,53)   99.3   99.7
+countLines  Lib    src/Lib.hs:(41,1)-(42,53)   99.0   99.7
 
 
                                                                                                                                             individual      inherited
@@ -21,44 +21,40 @@ MAIN                                              MAIN                     <buil
  CAF                                              GHC.IO.FD                <entire-module>                               373          0    0.0    0.0     0.0    0.0
  CAF                                              GHC.IO.Handle.FD         <entire-module>                               371          0    0.0    0.0     0.0    0.0
  CAF                                              GHC.IO.Handle.Text       <entire-module>                               369          0    0.0    0.0     0.0    0.0
- CAF                                              GHC.Event.Manager        <entire-module>                               321          0    0.0    0.0     0.0    0.0
  CAF                                              GHC.Event.Poll           <entire-module>                               319          0    0.0    0.0     0.0    0.0
  CAF                                              GHC.Event.Thread         <entire-module>                               318          0    0.0    0.0     0.0    0.0
  CAF:$fAlternativeConcurrently3                   Control.Concurrent.Async <no location info>                            517          0    0.0    0.0     0.0    0.0
-  pure                                            Control.Concurrent.Async Control/Concurrent/Async.hs:816:3-30          644          1    0.0    0.0     0.0    0.0
+  pure                                            Control.Concurrent.Async Control/Concurrent/Async.hs:816:3-30          637          1    0.0    0.0     0.0    0.0
  CAF:main1                                        Main                     <no location info>                            602          0    0.0    0.0     0.0    0.0
   main                                            Main                     app/Main.hs:(50,1)-(60,18)                    604          1    0.0    0.0     0.0    0.0
  CAF:main2                                        Main                     <no location info>                            599          0    0.0    0.0     0.0    0.0
  CAF:main5                                        Main                     <no location info>                            601          0    0.0    0.0     0.0    0.0
-  main                                            Main                     app/Main.hs:(50,1)-(60,18)                    642          0    0.0    0.0     0.0    0.0
-   mapConcurrently                                Control.Concurrent.Async Control/Concurrent/Async.hs:747:1-65          643          0    0.0    0.0     0.0    0.0
+  main                                            Main                     app/Main.hs:(50,1)-(60,18)                    635          0    0.0    0.0     0.0    0.0
+   mapConcurrently                                Control.Concurrent.Async Control/Concurrent/Async.hs:747:1-65          636          0    0.0    0.0     0.0    0.0
  CAF:withAsync5                                   Control.Concurrent.Async <no location info>                            521          0    0.0    0.0     0.0    0.0
   catchAll                                        Control.Concurrent.Async Control/Concurrent/Async.hs:858:1-16          628          1    0.0    0.0     0.0    0.0
  main                                             Main                     app/Main.hs:(50,1)-(60,18)                    605          0    0.0    0.0   100.0  100.0
-  getFilesInDir                                   Lib                      src/Lib.hs:(20,1)-(21,42)                     606          1    0.0    0.0     0.4    0.1
+  getFilesInDir                                   Lib                      src/Lib.hs:(20,1)-(21,42)                     606          1    0.0    0.0     0.3    0.1
    listDirectory'                                 Lib                      src/Lib.hs:(24,1)-(26,59)                     607          1    0.0    0.0     0.0    0.0
     listDirectory'.fullyQualify                   Lib                      src/Lib.hs:26:9-59                            610          1    0.0    0.0     0.0    0.0
      listDirectory'.fullyQualify.\                Lib                      src/Lib.hs:26:38-58                           613        100    0.0    0.0     0.0    0.0
-   onlyRegularFiles                               Lib                      src/Lib.hs:(29,1)-(34,22)                     611          1    0.0    0.0     0.4    0.0
-    isRegularFile'                                Lib                      src/Lib.hs:(37,1)-(38,38)                     612        100    0.4    0.0     0.4    0.0
+   onlyRegularFiles                               Lib                      src/Lib.hs:(29,1)-(34,22)                     611          1    0.0    0.0     0.3    0.0
+    isRegularFile'                                Lib                      src/Lib.hs:(37,1)-(38,38)                     612        100    0.3    0.0     0.3    0.0
     onlyRegularFiles.|>                           Lib                      src/Lib.hs:34:9-22                            616          2    0.0    0.0     0.0    0.0
      onlyRegularFiles.\                           Lib                      src/Lib.hs:32:32-37                           617        100    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                           Lib                      src/Lib.hs:33:24                              641         97    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                           Lib                      src/Lib.hs:33:24                              640          1    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                           Lib                      src/Lib.hs:33:24                              639          1    0.0    0.0     0.0    0.0
-     onlyRegularFiles.\                           Lib                      src/Lib.hs:33:24                              638          1    0.0    0.0     0.0    0.0
+     onlyRegularFiles.\                           Lib                      src/Lib.hs:33:24                              634         99    0.0    0.0     0.0    0.0
   main.dir                                        Main                     app/Main.hs:(53,7)-(55,35)                    608          1    0.0    0.0     0.0    0.0
    head'                                          Main                     app/Main.hs:(28,1)-(29,21)                    609          1    0.0    0.0     0.0    0.0
-  main.total                                      Main                     app/Main.hs:59:7-70                           665          1    0.0    0.0     0.0    0.0
-   main.total.\                                   Main                     app/Main.hs:59:48-56                          666        100    0.0    0.0     0.0    0.0
+  main.total                                      Main                     app/Main.hs:59:7-70                           655          1    0.0    0.0     0.0    0.0
+   main.total.\                                   Main                     app/Main.hs:59:48-56                          656        100    0.0    0.0     0.0    0.0
   mapConcurrently                                 Control.Concurrent.Async Control/Concurrent/Async.hs:747:1-65          614          1    0.0    0.0    99.3   99.8
    <*>                                            Control.Concurrent.Async Control/Concurrent/Async.hs:(817,3)-(818,58)  618        100    0.0    0.0    99.3   99.8
-    <*>.\                                         Control.Concurrent.Async Control/Concurrent/Async.hs:818:32-34         646        100    0.0    0.0     0.0    0.0
-     concurrently                                 Control.Concurrent.Async Control/Concurrent/Async.hs:(672,1)-(680,39)  647          0    0.0    0.0     0.0    0.0
-      concurrently'                               Control.Concurrent.Async Control/Concurrent/Async.hs:(685,1)-(730,16)  648          0    0.0    0.0     0.0    0.0
-       concurrently'.\                            Control.Concurrent.Async Control/Concurrent/Async.hs:(687,24)-(730,16) 649          0    0.0    0.0     0.0    0.0
-        catchAll                                  Control.Concurrent.Async Control/Concurrent/Async.hs:858:1-16          650          0    0.0    0.0     0.0    0.0
-         fmap                                     Control.Concurrent.Async Control/Concurrent/Async.hs:813:3-50          651          0    0.0    0.0     0.0    0.0
+    <*>.\                                         Control.Concurrent.Async Control/Concurrent/Async.hs:818:32-34         639        100    0.0    0.0     0.0    0.0
+     concurrently                                 Control.Concurrent.Async Control/Concurrent/Async.hs:(672,1)-(680,39)  640          0    0.0    0.0     0.0    0.0
+      concurrently'                               Control.Concurrent.Async Control/Concurrent/Async.hs:(685,1)-(730,16)  641          0    0.0    0.0     0.0    0.0
+       concurrently'.\                            Control.Concurrent.Async Control/Concurrent/Async.hs:(687,24)-(730,16) 642          0    0.0    0.0     0.0    0.0
+        catchAll                                  Control.Concurrent.Async Control/Concurrent/Async.hs:858:1-16          643          0    0.0    0.0     0.0    0.0
+         fmap                                     Control.Concurrent.Async Control/Concurrent/Async.hs:813:3-50          644          0    0.0    0.0     0.0    0.0
     concurrently                                  Control.Concurrent.Async Control/Concurrent/Async.hs:(672,1)-(680,39)  619        100    0.0    0.0    99.3   99.8
      concurrently'                                Control.Concurrent.Async Control/Concurrent/Async.hs:(685,1)-(730,16)  620        100    0.0    0.0    99.3   99.8
       concurrently'.\                             Control.Concurrent.Async Control/Concurrent/Async.hs:(687,24)-(730,16) 621        100    0.0    0.1    99.3   99.8
@@ -68,29 +64,22 @@ MAIN                                              MAIN                     <buil
          concurrently'.\.takeDone                 Control.Concurrent.Async Control/Concurrent/Async.hs:(700,13)-(708,24) 627          0    0.0    0.0     0.0    0.0
        concurrently'.\.stop                       Control.Concurrent.Async Control/Concurrent/Async.hs:(712,13)-(726,63) 622        100    0.0    0.0     0.0    0.0
        concurrently'.\.tryAgain                   Control.Concurrent.Async Control/Concurrent/Async.hs:710:13-66         624        100    0.0    0.0     0.0    0.0
-       catchAll                                   Control.Concurrent.Async Control/Concurrent/Async.hs:858:1-16          629          0    0.0    0.0    99.3   99.8
-        fmap                                      Control.Concurrent.Async Control/Concurrent/Async.hs:813:3-50          631         99    0.0    0.0    99.3   99.7
-         countLinesTask                           Main                     app/Main.hs:(40,1)-(47,41)                    633         99    0.0    0.0    98.2   98.7
-          countLinesTask.path'                    Main                     app/Main.hs:47:9-41                           656         99    0.0    0.0     0.0    0.0
-           countLinesTask.normalizePathToLocal    Main                     app/Main.hs:(43,9)-(46,50)                    657         99    0.0    0.0     0.0    0.0
-            countLinesTask.normalizePathToLocal.\ Main                     app/Main.hs:(44,34)-(46,50)                   658         99    0.0    0.0     0.0    0.0
-          countLines                              Lib                      src/Lib.hs:(41,1)-(42,53)                     637         97   98.2   98.7    98.2   98.7
-          countLines                              Lib                      src/Lib.hs:(41,1)-(42,53)                     636          1    0.0    0.0     0.0    0.0
-          countLines                              Lib                      src/Lib.hs:(41,1)-(42,53)                     635          1    0.0    0.0     0.0    0.0
-          countLinesTask.normalizePathToLocal     Main                     app/Main.hs:(43,9)-(46,50)                    659          0    0.0    0.0     0.0    0.0
-           countLinesTask.normalizePathToLocal.\  Main                     app/Main.hs:(44,34)-(46,50)                   660          0    0.0    0.0     0.0    0.0
-         countLinesTask                           Main                     app/Main.hs:(40,1)-(47,41)                    632          1    0.0    0.0     1.1    1.0
-          countLines                              Lib                      src/Lib.hs:(41,1)-(42,53)                     634          1    1.1    1.0     1.1    1.0
-          countLinesTask.path'                    Main                     app/Main.hs:47:9-41                           661          1    0.0    0.0     0.0    0.0
-           countLinesTask.normalizePathToLocal    Main                     app/Main.hs:(43,9)-(46,50)                    662          1    0.0    0.0     0.0    0.0
-            countLinesTask.normalizePathToLocal.\ Main                     app/Main.hs:(44,34)-(46,50)                   663          1    0.0    0.0     0.0    0.0
+       catchAll                                   Control.Concurrent.Async Control/Concurrent/Async.hs:858:1-16          629          0    0.3    0.0    99.3   99.8
+        fmap                                      Control.Concurrent.Async Control/Concurrent/Async.hs:813:3-50          631         99    0.0    0.0    99.0   99.7
+         countLinesTask                           Main                     app/Main.hs:(40,1)-(47,41)                    632        100    0.0    0.0    99.0   99.7
+          countLines                              Lib                      src/Lib.hs:(41,1)-(42,53)                     633        100   99.0   99.7    99.0   99.7
+          countLinesTask.path'                    Main                     app/Main.hs:47:9-41                           649        100    0.0    0.0     0.0    0.0
+           countLinesTask.normalizePathToLocal    Main                     app/Main.hs:(43,9)-(46,50)                    650        100    0.0    0.0     0.0    0.0
+            countLinesTask.normalizePathToLocal.\ Main                     app/Main.hs:(44,34)-(46,50)                   651        100    0.0    0.0     0.0    0.0
+          countLinesTask.normalizePathToLocal     Main                     app/Main.hs:(43,9)-(46,50)                    652          0    0.0    0.0     0.0    0.0
+           countLinesTask.normalizePathToLocal.\  Main                     app/Main.hs:(44,34)-(46,50)                   653          0    0.0    0.0     0.0    0.0
    fmap                                           Control.Concurrent.Async Control/Concurrent/Async.hs:813:3-50          630          1    0.0    0.0     0.0    0.0
    runConcurrently                                Control.Concurrent.Async Control/Concurrent/Async.hs:810:41-55         615          1    0.0    0.0     0.0    0.0
-  printLineCounts                                 Main                     app/Main.hs:(32,1)-(33,46)                    645          1    0.4    0.0     0.4    0.1
-   show                                           Main                     app/Main.hs:17:3-72                           653        100    0.0    0.0     0.0    0.0
-    leftPad                                       Main                     app/Main.hs:(23,1)-(25,16)                    654        100    0.0    0.0     0.0    0.0
-     leftPad.spaces                               Main                     app/Main.hs:24:7-49                           655        100    0.0    0.0     0.0    0.0
-   compare                                        Main                     app/Main.hs:20:3-63                           652         99    0.0    0.0     0.0    0.0
-  printTotal                                      Main                     app/Main.hs:(36,1)-(37,58)                    664          1    0.0    0.0     0.0    0.0
-   leftPad                                        Main                     app/Main.hs:(23,1)-(25,16)                    667          1    0.0    0.0     0.0    0.0
-    leftPad.spaces                                Main                     app/Main.hs:24:7-49                           668          1    0.0    0.0     0.0    0.0
+  printLineCounts                                 Main                     app/Main.hs:(32,1)-(33,46)                    638          1    0.3    0.0     0.3    0.1
+   show                                           Main                     app/Main.hs:17:3-72                           646        100    0.0    0.0     0.0    0.0
+    leftPad                                       Main                     app/Main.hs:(23,1)-(25,16)                    647        100    0.0    0.0     0.0    0.0
+     leftPad.spaces                               Main                     app/Main.hs:24:7-49                           648        100    0.0    0.0     0.0    0.0
+   compare                                        Main                     app/Main.hs:20:3-63                           645         99    0.0    0.0     0.0    0.0
+  printTotal                                      Main                     app/Main.hs:(36,1)-(37,58)                    654          1    0.0    0.0     0.0    0.0
+   leftPad                                        Main                     app/Main.hs:(23,1)-(25,16)                    657          1    0.0    0.0     0.0    0.0
+    leftPad.spaces                                Main                     app/Main.hs:24:7-49                           658          1    0.0    0.0     0.0    0.0
