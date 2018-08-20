@@ -1,0 +1,84 @@
+	Mon Aug 20 06:47 2018 Time and Allocation Profiling Report  (Final)
+
+	   wc-haskell-exe +RTS -N -p -RTS ../tmp
+
+	total time  =        0.07 secs   (290 ticks @ 1000 us, 4 processors)
+	total alloc = 435,719,512 bytes  (excludes profiling overheads)
+
+COST CENTRE    MODULE SRC                         %time %alloc
+
+countLinesTask Main   app/Main.hs:(59,1)-(66,50)   97.2   99.8
+
+
+                                                                                                                                                                  individual      inherited
+COST CENTRE                                      MODULE                               SRC                                                      no.     entries  %time %alloc   %time %alloc
+
+MAIN                                             MAIN                                 <built-in>                                               216          0    0.7    0.0   100.0  100.0
+ CAF                                             System.Directory                     <entire-module>                                          366          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.Conc.Signal                      <entire-module>                                          312          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.Conc.Sync                        <entire-module>                                          311          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.IO.Encoding                      <entire-module>                                          295          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.IO.Encoding.Iconv                <entire-module>                                          293          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.IO.FD                            <entire-module>                                          286          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.IO.Handle.FD                     <entire-module>                                          284          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.IO.Handle.Text                   <entire-module>                                          282          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.Event.Manager                    <entire-module>                                          235          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.Event.Poll                       <entire-module>                                          233          0    0.0    0.0     0.0    0.0
+ CAF                                             GHC.Event.Thread                     <entire-module>                                          232          0    0.0    0.0     0.0    0.0
+ CAF:globalPool                                  Control.Concurrent.ParallelIO.Global Control/Concurrent/ParallelIO/Global.hs:43:1-10          377          0    0.0    0.0     0.0    0.0
+  globalPool                                     Control.Concurrent.ParallelIO.Global Control/Concurrent/ParallelIO/Global.hs:43:1-58          455          1    0.0    0.0     0.0    0.0
+   startPool                                     Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:(67,1)-(69,67)    456          1    0.0    0.0     0.0    0.0
+ CAF:main1                                       Main                                 <no location info>                                       430          0    0.0    0.0     0.0    0.0
+  main                                           Main                                 app/Main.hs:(69,1)-(79,18)                               432          1    0.0    0.0     0.0    0.0
+ CAF:main2                                       Main                                 <no location info>                                       428          0    0.0    0.0     0.0    0.0
+ CAF:parallelInterleaved1                        Control.Concurrent.ParallelIO.Global <no location info>                                       393          0    0.0    0.0     0.0    0.0
+  parallelInterleaved                            Control.Concurrent.ParallelIO.Global Control/Concurrent/ParallelIO/Global.hs:119:1-54         442          1    0.0    0.0     0.0    0.0
+ main                                            Main                                 app/Main.hs:(69,1)-(79,18)                               433          0    0.0    0.0    99.3  100.0
+  countLinesTask                                 Main                                 app/Main.hs:(59,1)-(66,50)                               459        100    0.0    0.0     0.0    0.0
+  getFilesInDir                                  Lib                                  src/Lib.hs:(19,1)-(20,42)                                434          1    0.0    0.0     0.3    0.1
+   listDirectory'                                Lib                                  src/Lib.hs:(23,1)-(25,59)                                435          1    0.0    0.0     0.0    0.0
+    listDirectory'.fullyQualify                  Lib                                  src/Lib.hs:25:9-59                                       438          1    0.0    0.0     0.0    0.0
+     listDirectory'.fullyQualify.\               Lib                                  src/Lib.hs:25:38-58                                      441        100    0.0    0.0     0.0    0.0
+   onlyRegularFiles                              Lib                                  src/Lib.hs:(28,1)-(33,22)                                439          1    0.0    0.0     0.3    0.0
+    isRegularFile'                               Lib                                  src/Lib.hs:(36,1)-(37,38)                                440        100    0.3    0.0     0.3    0.0
+    onlyRegularFiles.|>                          Lib                                  src/Lib.hs:33:9-22                                       446          2    0.0    0.0     0.0    0.0
+     onlyRegularFiles.\                          Lib                                  src/Lib.hs:32:24                                         461        100    0.0    0.0     0.0    0.0
+     onlyRegularFiles.\                          Lib                                  src/Lib.hs:31:32-37                                      447        100    0.0    0.0     0.0    0.0
+  main.dir                                       Main                                 app/Main.hs:(72,7)-(74,35)                               436          1    0.0    0.0     0.0    0.0
+   head'                                         Main                                 app/Main.hs:(38,1)-(39,21)                               437          1    0.0    0.0     0.0    0.0
+  main.total                                     Main                                 app/Main.hs:78:7-70                                      481          1    0.0    0.0     0.0    0.0
+   main.total.\                                  Main                                 app/Main.hs:78:48-56                                     482        100    0.0    0.0     0.0    0.0
+  printLineCounts                                Main                                 app/Main.hs:(42,1)-(43,46)                               470          1    0.3    0.0     0.7    0.1
+   show                                          Main                                 app/Main.hs:27:3-72                                      472        100    0.0    0.0     0.3    0.0
+    leftPad                                      Main                                 app/Main.hs:(33,1)-(35,16)                               473        100    0.3    0.0     0.3    0.0
+     leftPad.spaces                              Main                                 app/Main.hs:34:7-49                                      474        100    0.0    0.0     0.0    0.0
+   compare                                       Main                                 app/Main.hs:30:3-63                                      471         99    0.0    0.0     0.0    0.0
+  printTotal                                     Main                                 app/Main.hs:(46,1)-(47,58)                               480          1    0.0    0.0     0.0    0.0
+   leftPad                                       Main                                 app/Main.hs:(33,1)-(35,16)                               483          1    0.0    0.0     0.0    0.0
+    leftPad.spaces                               Main                                 app/Main.hs:34:7-49                                      484          1    0.0    0.0     0.0    0.0
+  parallelInterleaved                            Control.Concurrent.ParallelIO.Global Control/Concurrent/ParallelIO/Global.hs:119:1-54         443          0    0.0    0.0    98.3   99.8
+   parallelInterleaved                           Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:(301,1)-(309,75)  444          1    0.0    0.0    98.3   99.8
+    parallelInterleaved.\                        Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:(301,52)-(309,75) 445          1    0.0    0.0    98.3   99.8
+     parallelInterleaved.\.\                     Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:(304,26)-(308,17) 448        100    0.0    0.0    97.9   99.8
+      reflectExceptionsTo                        Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:48:1-68           457        100    0.0    0.0    97.2   99.8
+       catchNonThreadKilled                      Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:42:1-125          458        100    0.0    0.0    97.2   99.8
+        countLinesTask                           Main                                 app/Main.hs:(59,1)-(66,50)                               460          0   97.2   99.8    97.2   99.8
+         countLinesTask.path'                    Main                                 app/Main.hs:61:7-39                                      475        100    0.0    0.0     0.0    0.0
+          countLinesTask.normalizePathToLocal    Main                                 app/Main.hs:(63,9)-(66,50)                               476        100    0.0    0.0     0.0    0.0
+           countLinesTask.normalizePathToLocal.\ Main                                 app/Main.hs:(64,34)-(66,50)                              477        100    0.0    0.0     0.0    0.0
+         countLinesTask.normalizePathToLocal     Main                                 app/Main.hs:(63,9)-(66,50)                               478          0    0.0    0.0     0.0    0.0
+          countLinesTask.normalizePathToLocal.\  Main                                 app/Main.hs:(64,34)-(66,50)                              479          0    0.0    0.0     0.0    0.0
+      killPoolWorkerFor                          Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:122:1-49          450         97    0.3    0.0     0.3    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           454          1    0.0    0.0     0.0    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           453          1    0.0    0.0     0.0    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           452          1    0.0    0.0     0.0    0.0
+      killPoolWorkerFor                          Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:122:1-49          449          2    0.0    0.0     0.0    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           451          1    0.0    0.0     0.0    0.0
+      spawnPoolWorkerFor                         Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:116:1-52          462          1    0.3    0.0     0.3    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           463          1    0.0    0.0     0.0    0.0
+     extraWorkerWhileBlocked                     Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:110:1-90          464          1    0.0    0.0     0.3    0.0
+      parallelInterleaved.\.\                    Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:309:50-68         467        100    0.3    0.0     0.3    0.0
+      killPoolWorkerFor                          Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:122:1-49          468          1    0.0    0.0     0.0    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           469          1    0.0    0.0     0.0    0.0
+      spawnPoolWorkerFor                         Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:116:1-52          465          1    0.0    0.0     0.0    0.0
+       pool_sem                                  Control.Concurrent.ParallelIO.Local  Control/Concurrent/ParallelIO/Local.hs:55:5-12           466          1    0.0    0.0     0.0    0.0
