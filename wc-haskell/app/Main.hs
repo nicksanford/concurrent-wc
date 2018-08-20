@@ -4,6 +4,7 @@ module Main where
 
 import Control.Concurrent
 import qualified Data.ByteString.Lazy as B
+import qualified Data.ByteString.Lazy.Char8 as C
 import Data.List
 import Control.Monad.IO.Class
 import qualified Control.Monad.Par.IO  as ParIO
@@ -58,7 +59,7 @@ countLinesTask :: FilePath -> FilePath -> IO LineCount
 countLinesTask currentDir path = do
   lines <- B.readFile path
   let path' = normalizePathToLocal path
-  return $ LineCount path' (countLines lines)
+  return $ LineCount path' (fromIntegral . C.count '\n' $ lines)
   where normalizePathToLocal = \path ->
                                  case stripPrefix (currentDir ++ "/") path of
                                    Just stripped -> stripped
@@ -72,8 +73,7 @@ main = do
               Just path -> path
               Nothing -> currentDir
   files <- getFilesInDir dir
---  contents <- mapM (\x -> MMap.mmapFileByteStringLazy x Nothing) files
-  lineCounts <- Parallel.parallel $ map (countLinesTask currentDir) files
+  lineCounts <- Parallel.parallelInterleaved $ map (countLinesTask currentDir) files
   printLineCounts lineCounts
   let total = foldr (\(LineCount _ count) t -> count + t) 0 lineCounts
   printTotal total
